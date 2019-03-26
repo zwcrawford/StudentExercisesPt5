@@ -33,8 +33,8 @@ namespace StudentExercisesPt5.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT ch.id, ch.name, 
-                                          FROM Cohort";
+                    cmd.CommandText = @"SELECT ch.id, ch.name 
+                                          FROM Cohort ch";
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Cohort> cohorts = new List<Cohort>();

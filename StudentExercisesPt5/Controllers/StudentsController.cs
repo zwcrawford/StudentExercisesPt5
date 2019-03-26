@@ -33,9 +33,9 @@ namespace StudentExercisesPt5.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT s.id, s.firstname, s.lastname,
-                                               s.slackhandle, s.cohortId, c.name as cohortname
-                                          FROM Student s INNER JOIN Cohort c ON s.cohortid = c.id";
+                    cmd.CommandText = @"SELECT s.Id, s.FirstName, s.LastName,
+                                               s.SlackHandle, s.CohortId, c.[Name] as CohortName
+                                          FROM Student s JOIN Cohort c ON s.CohortId = c.Id";
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Student> students = new List<Student>();
@@ -43,15 +43,15 @@ namespace StudentExercisesPt5.Controllers
                     {
                         Student student = new Student
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("id")),
-                            FirstName = reader.GetString(reader.GetOrdinal("firstname")),
-                            LastName = reader.GetString(reader.GetOrdinal("lastname")),
-                            SlackHandle = reader.GetString(reader.GetOrdinal("slackhandle")),
-                            CohortId = reader.GetInt32(reader.GetOrdinal("cohortid")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
                             Cohort = new Cohort
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("cohortid")),
-                                Name = reader.GetString(reader.GetOrdinal("cohortname"))
+                                Id = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                                Name = reader.GetString(reader.GetOrdinal("CohortName"))
                             }
                         };
 
@@ -77,8 +77,8 @@ namespace StudentExercisesPt5.Controllers
                 {
                     cmd.CommandText = @"SELECT s.id, s.firstname, s.lastname,
                                                s.slackhandle, s.cohortId, c.name as cohortname
-                                          FROM Student s INNER JOIN Cohort c ON i.cohortid = c.id
-                                         WHERE i.id = @id;";
+                                          FROM Student s INNER JOIN Cohort c ON s.cohortid = c.id
+                                         WHERE s.id = @id;";
                     cmd.Parameters.Add(new SqlParameter("@id", id));
                     SqlDataReader reader = cmd.ExecuteReader();
 
