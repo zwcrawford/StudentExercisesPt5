@@ -35,7 +35,7 @@ namespace StudentExercisesPt5.Controllers
                 {
                     cmd.CommandText = @"SELECT s.id, s.firstname, s.lastname,
                                                s.slackhandle, s.cohortId, c.name as cohortname
-                                          FROM Student s INNER JOIN Cohort c ON i.cohortid = c.id";
+                                          FROM Student s INNER JOIN Cohort c ON s.cohortid = c.id";
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Student> students = new List<Student>();
