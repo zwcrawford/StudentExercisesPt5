@@ -12,7 +12,7 @@ namespace StudentExercisesPt5.Controllers
     [ApiController]
     public class InstructorsController : ControllerBase
     {
-        // GET api/values
+        // Connection established
         public SqlConnection Connection 
         {
             get
@@ -24,7 +24,6 @@ namespace StudentExercisesPt5.Controllers
         /***********************
          GET
         ***********************/
-
         // GET api/Instructors
         [HttpGet]
         public IEnumerable<Instructor> Get()
